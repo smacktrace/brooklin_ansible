@@ -45,12 +45,16 @@
   get_url:
     url: "https://www-us.apache.org/dist/kafka/{{ KAFKA_VERSION }}/{{ KAFKA_TGZ }}"
     dest: /brooklin/kafka
+  become: yes
+  become_user: zk
 
 - name: Extract Kafka
   unarchive:
     remote_src: yes
     src: /brooklin/kafka/{{ KAFKA_TGZ }}
     dest: /brooklin/kafka/
+  become: yes
+  become_user: zk
 
 - name: Open Zookeeper Port
   firewalld:
