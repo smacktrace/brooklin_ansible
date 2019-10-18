@@ -1,5 +1,5 @@
 ---
-# This file installs zookeeper
+# This file installs zookeeper (SUPPORT FROM: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an-apache-zookeeper-cluster-on-ubuntu-18-04)
 
 
 - name: Install EPEL 
@@ -51,8 +51,8 @@
     remote_src: yes
     src: /brooklin/kafka/{{ KAFKA_TGZ }}
     dest: /brooklin/kafka/
-  become: yes
-  become_user: zk
+    owner: zk
+    group: zk
 
 - name: Open Zookeeper Port
   firewalld:
