@@ -52,3 +52,10 @@
       remote_src: yes
       src: /brooklin/brooklin/{{ BROOKLIN_TGZ }}
       dest: /brooklin/brooklin/
+  - name: Update Firewalld for Kafka ports
+    firewalld:
+      port: 9092-9093/tcp
+      permanent: yes
+      immediate: yes
+      state: enabled
+      zone: public
