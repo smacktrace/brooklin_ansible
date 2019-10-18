@@ -61,7 +61,7 @@
     owner: zk
     group: zk
 
-- Name: Create Systemd Service
+- name: Create Systemd Service
   template: 
     src: zk.service.j2
     dest: /etc/systemd/system/zk.service
