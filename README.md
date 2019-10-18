@@ -3,10 +3,13 @@ Linkedin Brooklin Ansible Install
 
 ## Set Ansible Remote User Var
 ```
-ANSIBLE_REMOTE_USER=<your remote user>
+export ANSIBLE_REMOTE_USER=<your remote user>
 ```
 
-## Install Dependencies
+## Update hosts file
+Update the hosts file and update the [brooklin] and [zookeeper] sections with the IP or FQDN of your respective servers
+
+## Run Playbook
 ```
-ansible-playbook install_brooklin_dependencies.yml
+ansible-playbook -i hosts site.yml
 ```
