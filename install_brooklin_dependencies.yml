@@ -1,7 +1,7 @@
 ---
 - hosts: brooklin
   become: true
-  remote_user: {{ lookup('env','ANSIBLE_REMOTE_USER') }}
+  remote_user: "{{ lookup('env','ANSIBLE_REMOTE_USER') }}"
   vars:
     SCALA_VERSION: "2.12"
     KAFKA_VERSION: "2.2.0"
