@@ -1,11 +1,16 @@
 ---
 # This Playbook would deploy the whole brooklin cluster
 
-- hosts: brooklin
+- name: Setup Brooklin cluster dependencies
+  hosts: brooklin
+  become: true
+  remote_user: "{{ lookup('env','ANSIBLE_REMOTE_USER') }}"
   roles:
   - role: brooklin
 
-- hosts: zookeeper
+- name: Setup Zookeeper cluster dependencies
+  hosts: zookeeper
+  become: true
+  remote_user: "{{ lookup('env','ANSIBLE_REMOTE_USER') }}"
   roles:
   - role: zookeeper
-

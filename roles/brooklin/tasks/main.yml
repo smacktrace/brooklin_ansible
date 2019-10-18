@@ -2,9 +2,6 @@
 # This file install Brooklin on a host
 
 
-become: true
-remote_user: "{{ lookup('env','ANSIBLE_REMOTE_USER') }}"
-tasks:
 - name: Install EPEL 
   yum: 
     name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
