@@ -78,6 +78,6 @@
     zone: public
 
 - name: Start Zookeeper Service
-  command: "/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh /brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties"
+  command: "/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh /brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties >/dev/null 2>&1 &"
   become_user: zk
 
