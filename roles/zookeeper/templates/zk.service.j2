@@ -9,9 +9,8 @@ Type=forking
 SyslogIdentifier=zookeeper
 User=zk
 Group=zk
-ExecStart=/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh start /brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties
+ExecStart=/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh  /brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties
 ExecStop=/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh stop 
-ExecReload=/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh restart /brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties
 TimeoutSec=30
 Restart=on-failure
 
