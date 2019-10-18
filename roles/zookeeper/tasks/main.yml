@@ -56,7 +56,7 @@
 
 - name: Update Zookeeper Config
   file:
-    src: files/zookeeper.properties
+    src: /files/zookeeper.properties
     dest: "/brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties"
     owner: zk
     group: zk
