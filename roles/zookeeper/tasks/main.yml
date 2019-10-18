@@ -20,10 +20,23 @@
     - epel-release
     - jq
 
+- name: Ensure group zk exists
+  group:
+    name: zk
+    state: present
+
+- name: Setup Zookeeper user
+  user:
+    name: zk
+    comment: Zookeeper user
+    groups: zk,wheel
+
 - name: Create Kafka Install Dirs
   file:
     path: "{{ item }}"
     state: directory
+    owner: zk
+    group: zk
   with_items:
     - /brooklin
     - /brooklin/kafka
@@ -47,13 +60,3 @@
     state: enabled
     zone: public
 
-- name: Ensure group zk exists
-  group:
-    name: zk
-    state: present
-
-- name: Setup Zookeeper user
-  user:
-    name: zk
-    comment: Zookeeper user
-    groups: zk,wheel
