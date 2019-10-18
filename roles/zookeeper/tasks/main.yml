@@ -37,6 +37,7 @@
     state: directory
     owner: zk
     group: zk
+    recursive: yes
   with_items:
     - /brooklin
     - /brooklin/kafka
@@ -45,8 +46,6 @@
   get_url:
     url: "https://www-us.apache.org/dist/kafka/{{ KAFKA_VERSION }}/{{ KAFKA_TGZ }}"
     dest: /brooklin/kafka
-  become: yes
-  become_user: zk
 
 - name: Extract Kafka
   unarchive:
