@@ -1,0 +1,19 @@
+[Unit]
+Description=Zookeeper Daemon
+Documentation=http://zookeeper.apache.org
+Requires=network.target
+After=network.target
+
+[Service]    
+Type=forking
+WorkingDirectory=/opt/zookeeper
+User=zk
+Group=zk
+ExecStart=/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh start /brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties
+ExecStop=/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh stop /brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties
+ExecReload=/brooklin/kafka/{{ KAFKA_FILENAME }}/bin/zookeeper-server-start.sh restart /brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties
+TimeoutSec=30
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

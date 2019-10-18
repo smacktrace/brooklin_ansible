@@ -61,6 +61,14 @@
     owner: zk
     group: zk
 
+- Name: Create Systemd Service
+  template: 
+    src: zk.service.j2
+    dest: /etc/systemd/system/zk.service
+    owner: bin
+    group: wheel
+    mode: '0644'
+
 - name: Open Zookeeper Port
   firewalld:
     port: 2181/tcp
