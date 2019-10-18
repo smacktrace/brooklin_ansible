@@ -1,0 +1,50 @@
+---
+- hosts: zookeeper
+  become: true
+  remote_user: "{{ lookup('env','ANSIBLE_REMOTE_USER') }}"
+  vars:
+    SCALA_VERSION: "2.12"
+    KAFKA_VERSION: "2.2.0"
+    KAFKA_FILENAME: "kafka_{{ SCALA_VERSION }}-{{ KAFKA_VERSION }}"
+    KAFKA_TGZ: "{{ KAFKA_FILENAME }}.tgz"
+  tasks:
+  - name: Install EPEL 
+    yum: 
+      name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  - name: Run Yum Update
+    yum:
+      name: '*'
+      state: latest
+  - name: Install Required Brooklin packages
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - java-1.8.0-openjdk
+      - epel-release
+      - jq
+  - name: Create Kafka Install Dirs
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - /brooklin
+      - /brooklin/kafka
+  - name: Download Kafka
+    get_url:
+      url: "https://www-us.apache.org/dist/kafka/{{ KAFKA_VERSION }}/{{ KAFKA_TGZ }}"
+      dest: /brooklin/kafka
+  - name: Extract Kafka
+    unarchive:
+      remote_src: yes
+      src: /brooklin/kafka/{{ KAFKA_TGZ }}
+      dest: /brooklin/kafka/
+  - name: Open Zookeeper Port
+    firewalld:
+      port: 2181/tcp
+      permanent: yes
+      immediate: yes
+      state: enabled
+      zone: public
+  - name: Start Zookeeper
+    command: /brooklin/kafka/"kafka_{{ SCALA_VERSION }}-{{ KAFKA_VERSION }}"/bin/zookeeper-server-start.sh /brooklin/kafka/"kafka_{{ SCALA_VERSION }}-{{ KAFKA_VERSION }}"/config/zookeeper.properties >/dev/null 2>&1 &
