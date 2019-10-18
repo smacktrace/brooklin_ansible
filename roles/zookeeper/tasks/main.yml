@@ -60,6 +60,7 @@
     dest: "/brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties"
     owner: zk
     group: zk
+    state: hard
 
 - name: Open Zookeeper Port
   firewalld:
