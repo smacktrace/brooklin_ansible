@@ -37,7 +37,6 @@
     state: directory
     owner: zk
     group: zk
-    recursive: yes
   with_items:
     - /brooklin
     - /brooklin/kafka
