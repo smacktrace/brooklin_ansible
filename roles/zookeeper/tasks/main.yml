@@ -56,4 +56,4 @@
   user:
     name: zk
     comment: Zookeeper user
-    groups: zk,wheell
+    groups: zk,wheel
