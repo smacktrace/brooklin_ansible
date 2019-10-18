@@ -5,10 +5,12 @@
 - name: Install EPEL 
   yum: 
     name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
 - name: Run Yum Update
   yum:
     name: '*'
     state: latest
+
 - name: Install Required Brooklin packages
   yum:
     name: "{{ packages }}"
@@ -17,6 +19,7 @@
     - java-1.8.0-openjdk
     - epel-release
     - jq
+
 - name: Create Brooklin Install Dirs
   file:
     path: "{{ item }}"
@@ -25,24 +28,29 @@
     - /brooklin
     - /brooklin/kafka
     - /brooklin/brooklin
+
 - name: Download Kafka
   get_url:
     url: "https://www-us.apache.org/dist/kafka/{{ KAFKA_VERSION }}/{{ KAFKA_TGZ }}"
     dest: /brooklin/kafka
+
 - name: Extract Kafka
   unarchive:
     remote_src: yes
     src: /brooklin/kafka/{{ KAFKA_TGZ }}
     dest: /brooklin/kafka/
+
 - name: Download Brooklin
   get_url: 
     url: "https://github.com/linkedin/brooklin/releases/download/{{ BROOKLIN_VERSION }}/{{ BROOKLIN_TGZ }}"
     dest: /brooklin/brooklin
+
 - name: Extract Brooklin
   unarchive:
     remote_src: yes
     src: /brooklin/brooklin/{{ BROOKLIN_TGZ }}
     dest: /brooklin/brooklin/
+    
 - name: Update Firewalld for Kafka ports
   firewalld:
     port: 9092-9093/tcp

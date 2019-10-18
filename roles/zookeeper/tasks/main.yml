@@ -5,10 +5,12 @@
 - name: Install EPEL 
   yum: 
     name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
 - name: Run Yum Update
   yum:
     name: '*'
     state: latest
+
 - name: Install Required Brooklin packages
   yum:
     name: "{{ packages }}"
@@ -17,6 +19,7 @@
     - java-1.8.0-openjdk
     - epel-release
     - jq
+
 - name: Create Kafka Install Dirs
   file:
     path: "{{ item }}"
@@ -24,15 +27,18 @@
   with_items:
     - /brooklin
     - /brooklin/kafka
+
 - name: Download Kafka
   get_url:
     url: "https://www-us.apache.org/dist/kafka/{{ KAFKA_VERSION }}/{{ KAFKA_TGZ }}"
     dest: /brooklin/kafka
+
 - name: Extract Kafka
   unarchive:
     remote_src: yes
     src: /brooklin/kafka/{{ KAFKA_TGZ }}
     dest: /brooklin/kafka/
+
 - name: Open Zookeeper Port
   firewalld:
     port: 2181/tcp
@@ -40,3 +46,14 @@
     immediate: yes
     state: enabled
     zone: public
+
+- name: Ensure group zk exists
+  group:
+    name: zk
+    state: present
+
+- name: Setup Zookeeper user
+  user:
+    name: zk
+    comment: Zookeeper user
+    groups: zk,wall
