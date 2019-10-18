@@ -1,0 +1,11 @@
+---
+# This Playbook would deploy the whole brooklin cluster
+
+- hosts: brooklin
+  roles:
+  - role: brooklin
+
+- hosts: zookeeper
+  roles:
+  - role: zookeeper
+
