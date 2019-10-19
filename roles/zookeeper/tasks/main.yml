@@ -1,5 +1,5 @@
 ---
-# This file installs zookeeper (SUPPORT FROM: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an-apache-zookeeper-cluster-on-ubuntu-18-04)
+# This file installs zookeeper (example: https://blog.redbranch.net/2018/04/19/zookeeper-install-on-centos-7/)
 
 
 - name: Install EPEL 
@@ -54,6 +54,8 @@
     src: "/opt/apache-zookeeper-{{ ZOOKEEPER_VERSION }}"
     dest: "/opt/zookeeper"
     state: link
+    owner: zk
+    group: zk
 
 # - name: Update Zookeeper Config
 #   copy:
