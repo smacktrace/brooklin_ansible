@@ -41,18 +41,25 @@
     - /brooklin
     - /brooklin/kafka
 
+- name: Check if ZooKeeper has already been downloaded and unpacked
+  stat:
+    path: /brooklin/kafka/{{ KAFKA_TGZ }}
+  register: dir
+
 - name: Download Kafka
   get_url:
     url: "https://www-us.apache.org/dist/kafka/{{ KAFKA_VERSION }}/{{ KAFKA_TGZ }}"
     dest: /brooklin/kafka
+  when: not dir.stat.exists
 
-- name: Extract Kafka
+- name: Unpack Kafka
   unarchive:
     remote_src: yes
     src: /brooklin/kafka/{{ KAFKA_TGZ }}
     dest: /brooklin/kafka/
     owner: zk
     group: zk
+  when: not dir.stat.exists
 
 - name: Update Zookeeper Config
   copy:
@@ -77,7 +84,7 @@
     state: enabled
     zone: public
 
-- name: Start Zookeeper Service
-  command: chdir="/brooklin/kafka/{{ KAFKA_FILENAME }}" bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
-  become_user: zk
+# - name: Start Zookeeper Service
+#   command: chdir="/brooklin/kafka/{{ KAFKA_FILENAME }}" bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
+#   become_user: zk
 
