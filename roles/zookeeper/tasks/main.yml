@@ -57,6 +57,14 @@
     owner: zk
     group: zk
 
+- name: Zookeeper Data zk_dir
+  file: 
+    path: /opt/zookeeper/data
+    state: directory
+    owner: zk
+    group: zk
+
+
 - name: Update Zookeeper Config
   template:
     src: zoo.cfg.j2
