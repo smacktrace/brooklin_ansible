@@ -11,7 +11,7 @@
     name: '*'
     state: latest
 
-- name: Install Required Brooklin packages
+- name: Install Required Zookeeper packages
   yum:
     name: "{{ packages }}"
   vars:
@@ -56,7 +56,7 @@
     dest: /zookeeper
     owner: zk
     group: zk
-  when: not dir.stat.exists
+  when: not zk_dir.stat.exists
 
 # - name: Update Zookeeper Config
 #   copy:
