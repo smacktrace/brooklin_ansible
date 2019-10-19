@@ -72,6 +72,31 @@
     owner: zk
     group: zk
 
+- name: Open Zookeeper Port 2181
+  firewalld:
+    port: 2181/tcp
+    permanent: yes
+    immediate: yes
+    state: enabled
+    zone: public
+
+- name: Open Zookeeper Port 2888
+  firewalld:
+    port: 2888/tcp
+    permanent: yes
+    immediate: yes
+    state: enabled
+    zone: public
+
+- name: Open Zookeeper Port 3888
+  firewalld:
+    port: 3888/tcp
+    permanent: yes
+    immediate: yes
+    state: enabled
+    zone: public
+
+
 # # - name: Create Systemd Service
 # #   template: 
 # #     src: zk.service.j2
@@ -79,18 +104,3 @@
 # #     owner: bin
 # #     group: wheel
 # #     mode: '0644'
-
-# - name: Open Zookeeper Port
-#   firewalld:
-#     port: 2181/tcp
-#     permanent: yes
-#     immediate: yes
-#     state: enabled
-#     zone: public
-
-# - name: Start Zookeeper Service
-#   shell: bin/zookeeper-server-start.sh config/zookeeper.properties
-#   args: 
-#     chdir: /brooklin/kafka/{{ KAFKA_FILENAME }}
-#   become_user: zk
-
