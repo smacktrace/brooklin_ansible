@@ -49,6 +49,12 @@
     group: zk
   when: not zk_dir.stat.exists
 
+- name: Symlink Zookeeper
+  file:
+    src: "/opt/apache-zookeeper-{{ ZOOKEEPER_VERSION }}"
+    dest: "/opt/zookeeper"
+    state: link
+
 # - name: Update Zookeeper Config
 #   copy:
 #     src: zookeeper.properties
