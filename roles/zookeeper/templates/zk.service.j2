@@ -1,19 +1,19 @@
 [Unit]
-Description=Zookeeper Daemon
-Documentation=http://zookeeper.apache.org
-Requires=network.target
-After=network.target
+Description=Zookeeper Service
 
-[Service]    
-Type=forking
+[Service]
+Type=simple
+WorkingDirectory=/opt/zookeeper/
+PIDFile=/opt/zookeeper/data/zookeeper_server.pid
 SyslogIdentifier=zookeeper
 User=zk
 Group=zk
-WorkingDirectory=/brooklin/kafka/{{ KAFKA_FILENAME }}
-ExecStart=/bin/bash -c "cd /brooklin/kafka/{{ KAFKA_FILENAME }}; bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &""
-ExecStop=/bin/bash -c "cd /brooklin/kafka/{{ KAFKA_FILENAME }}; bin/zookeeper-server-start.sh stop"
-TimeoutSec=30
+ExecStart=/opt/zookeeper/bin/zkServer.sh start
+ExecStop=/opt/zookeeper/bin/zkServer.sh stop
+Restart=always
+TimeoutSec=20
+SuccessExitStatus=130 143
 Restart=on-failure
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

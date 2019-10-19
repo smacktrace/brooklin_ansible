@@ -96,11 +96,10 @@
     state: enabled
     zone: public
 
-
-# # - name: Create Systemd Service
-# #   template: 
-# #     src: zk.service.j2
-# #     dest: /etc/systemd/system/zk.service
-# #     owner: bin
-# #     group: wheel
-# #     mode: '0644'
+- name: Create Systemd Service
+  template: 
+    src: zk.service.j2
+    dest: /etc/systemd/system/zk.service
+    owner: bin
+    group: wheel
+    mode: '0644'
