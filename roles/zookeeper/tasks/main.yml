@@ -108,5 +108,3 @@
   service:
     name: zk
     state: started
-  become_user: zk
-  become_method: sudo
