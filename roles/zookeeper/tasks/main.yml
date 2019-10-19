@@ -17,9 +17,6 @@
   vars:
     packages:
     - java-1.8.0-openjdk
-    - epel-release
-    - jq
-    - python2-pip.noarch
 
 - name: Ensure group zk exists
   group:
@@ -32,62 +29,61 @@
     comment: Zookeeper user
     groups: zk,wheel
 
-- name: Create Kafka Install Dirs
+- name: Create Zookeeper Install Dirs
   file:
     path: "{{ item }}"
     state: directory
     owner: zk
     group: zk
   with_items:
-    - /brooklin
-    - /brooklin/kafka
+    - /zookeeper
 
 - name: Check if ZooKeeper has already been downloaded and unpacked
   stat:
-    path: /brooklin/kafka/{{ KAFKA_TGZ }}
-  register: dir
+    path: /zookeper/{{ ZOOKEEPER_TARGZ }}
+  register: zk_dir
 
-- name: Download Kafka
+- name: Download Zookeeper
   get_url:
-    url: "https://www-us.apache.org/dist/kafka/{{ KAFKA_VERSION }}/{{ KAFKA_TGZ }}"
-    dest: /brooklin/kafka
-  when: not dir.stat.exists
+    url: "http://apache.mirrors.pair.com/zookeeper/zookeeper-{{ ZOOKEEPER_VERSION }}/apache-zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz}"
+    dest: /zookeeper
+  when: not zk_dir.stat.exists
 
-- name: Unpack Kafka
+- name: Unpack Zookeeper
   unarchive:
     remote_src: yes
-    src: /brooklin/kafka/{{ KAFKA_TGZ }}
-    dest: /brooklin/kafka/
+    src: /zookeeper{{ ZOOKEEPER_TARGZ }}
+    dest: /zookeeper
     owner: zk
     group: zk
   when: not dir.stat.exists
 
-- name: Update Zookeeper Config
-  copy:
-    src: zookeeper.properties
-    dest: "/brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties"
-    owner: zk
-    group: zk
+# - name: Update Zookeeper Config
+#   copy:
+#     src: zookeeper.properties
+#     dest: "/brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties"
+#     owner: zk
+#     group: zk
 
-# - name: Create Systemd Service
-#   template: 
-#     src: zk.service.j2
-#     dest: /etc/systemd/system/zk.service
-#     owner: bin
-#     group: wheel
-#     mode: '0644'
+# # - name: Create Systemd Service
+# #   template: 
+# #     src: zk.service.j2
+# #     dest: /etc/systemd/system/zk.service
+# #     owner: bin
+# #     group: wheel
+# #     mode: '0644'
 
-- name: Open Zookeeper Port
-  firewalld:
-    port: 2181/tcp
-    permanent: yes
-    immediate: yes
-    state: enabled
-    zone: public
+# - name: Open Zookeeper Port
+#   firewalld:
+#     port: 2181/tcp
+#     permanent: yes
+#     immediate: yes
+#     state: enabled
+#     zone: public
 
-- name: Start Zookeeper Service
-  shell: bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
-  args: 
-    chdir: /brooklin/kafka/{{ KAFKA_FILENAME }}
-  become_user: zk
+# - name: Start Zookeeper Service
+#   shell: bin/zookeeper-server-start.sh config/zookeeper.properties
+#   args: 
+#     chdir: /brooklin/kafka/{{ KAFKA_FILENAME }}
+#   become_user: zk
 
