@@ -19,7 +19,7 @@
     - java-1.8.0-openjdk
     - epel-release
     - jq
-    - python27-python-pip
+    - python2-pip.noarch
 
 - name: Ensure group zk exists
   group:
