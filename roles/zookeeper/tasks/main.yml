@@ -103,3 +103,10 @@
     owner: bin
     group: wheel
     mode: '0644'
+
+- name: Start ZooKeeper
+  service:
+    name: zk
+    state: started
+  sudo: true
+  sudo_user: zk
