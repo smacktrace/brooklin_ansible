@@ -29,15 +29,6 @@
     comment: Zookeeper user
     groups: zk,wheel
 
-- name: Create Zookeeper Install Dirs
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: zk
-    group: zk
-  with_items:
-    - /zookeeper
-
 - name: Check if ZooKeeper has already been downloaded and unpacked
   stat:
     path: /zookeper/{{ ZOOKEEPER_TARGZ }}
@@ -46,14 +37,14 @@
 - name: Download Zookeeper
   get_url:
     url: "http://apache.mirrors.pair.com/zookeeper/zookeeper-{{ ZOOKEEPER_VERSION }}/apache-zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz"
-    dest: /zookeeper
+    dest: /opt
   when: not zk_dir.stat.exists
 
 - name: Unpack Zookeeper
   unarchive:
     remote_src: yes
-    src: /zookeeper/{{ ZOOKEEPER_TARGZ }}
-    dest: /zookeeper
+    src: /opt/{{ ZOOKEEPER_TARGZ }}
+    dest: /opt
     owner: zk
     group: zk
   when: not zk_dir.stat.exists
