@@ -17,7 +17,7 @@ BROOKLIN_TGZ: "{{ BROOKLIN_FILENAME }}.tgz"
 
 # Zookeeper
 ZOOKEEPER_VERSION: "3.4.14"
-ZOOKEEPER_TARGZ: "apache-zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz"
+ZOOKEEPER_TARGZ: "zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz"
 
 zookeeper_server_1: "10.2.3.16"
 
