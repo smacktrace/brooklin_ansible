@@ -86,7 +86,9 @@
     zone: public
 
 - name: Start Zookeeper Service
-  chdir: /brooklin/kafka/{{ KAFKA_FILENAME }}
   shell: bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
+    args: 
+      chdir: /brooklin/kafka/{{ KAFKA_FILENAME }}
+
   become_user: zk
 
