@@ -51,7 +51,7 @@
 
 - name: Symlink Zookeeper
   file:
-    src: "/opt/apache-zookeeper-{{ ZOOKEEPER_VERSION }}"
+    src: "/opt/zookeeper-{{ ZOOKEEPER_VERSION }}"
     dest: "/opt/zookeeper"
     state: link
     owner: zk
