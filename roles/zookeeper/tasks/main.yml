@@ -45,7 +45,7 @@
 
 - name: Download Zookeeper
   get_url:
-    url: "http://apache.mirrors.pair.com/zookeeper/zookeeper-{{ ZOOKEEPER_VERSION }}/apache-zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz}"
+    url: "http://apache.mirrors.pair.com/zookeeper/zookeeper-{{ ZOOKEEPER_VERSION }}/apache-zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz"
     dest: /zookeeper
   when: not zk_dir.stat.exists
 
