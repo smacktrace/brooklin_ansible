@@ -85,17 +85,7 @@
     state: enabled
     zone: public
 
-- name: PIP Deps for for process IDs
-  pip:
-    name: psutil
-
-- name: Getting process IDs of the process
-  pids:
-      name: java
-  register: java_pids
-
 - name: Start Zookeeper Service
   shell: "cd /brooklin/kafka/{{ KAFKA_FILENAME }}; bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &"
   become_user: zk
-  when: java_pids|length > 0
 
