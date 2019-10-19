@@ -68,13 +68,13 @@
     owner: zk
     group: zk
 
-# - name: Create Systemd Service
-#   template: 
-#     src: zk.service.j2
-#     dest: /etc/systemd/system/zk.service
-#     owner: bin
-#     group: wheel
-#     mode: '0644'
+- name: Create Systemd Service
+  template: 
+    src: zk.service.j2
+    dest: /etc/systemd/system/zk.service
+    owner: bin
+    group: wheel
+    mode: '0644'
 
 - name: Open Zookeeper Port
   firewalld:
@@ -84,7 +84,7 @@
     state: enabled
     zone: public
 
-- name: Start Zookeeper Service
-  shell: "cd /brooklin/kafka/{{ KAFKA_FILENAME }}; bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &"
-  become_user: zk
+# - name: Start Zookeeper Service
+#   shell: "cd /brooklin/kafka/{{ KAFKA_FILENAME }}; bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &"
+#   become_user: zk
 
