@@ -52,7 +52,7 @@
 - name: Unpack Zookeeper
   unarchive:
     remote_src: yes
-    src: /zookeeper{{ ZOOKEEPER_TARGZ }}
+    src: /zookeeper/{{ ZOOKEEPER_TARGZ }}
     dest: /zookeeper
     owner: zk
     group: zk
