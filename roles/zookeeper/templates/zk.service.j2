@@ -10,8 +10,8 @@ SyslogIdentifier=zookeeper
 User=zk
 Group=zk
 WorkingDirectory=/brooklin/kafka/{{ KAFKA_FILENAME }}
-ExecStart=/bin/bash bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
-ExecStop=/bin/bash bin/zookeeper-server-start.sh stop 
+ExecStart=/bin/bash -c "cd /brooklin/kafka/{{ KAFKA_FILENAME }}; bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &""
+ExecStop=/bin/bash -c "cd /brooklin/kafka/{{ KAFKA_FILENAME }}; bin/zookeeper-server-start.sh stop"
 TimeoutSec=30
 Restart=on-failure
 
