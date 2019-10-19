@@ -57,12 +57,12 @@
     owner: zk
     group: zk
 
-# - name: Update Zookeeper Config
-#   copy:
-#     src: zookeeper.properties
-#     dest: "/brooklin/kafka/{{ KAFKA_FILENAME }}/config/zookeeper.properties"
-#     owner: zk
-#     group: zk
+- name: Update Zookeeper Config
+  template:
+    src: zoo.cfg.j2
+    dest: /opt/zookeeper/conf/zoo.cfg
+    owner: zk
+    group: zk
 
 # # - name: Create Systemd Service
 # #   template: 
