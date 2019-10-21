@@ -96,7 +96,7 @@
     state: enabled
     zone: public
 
-- name: Create Systemd Service
+- name: Create and Enable Systemd Service
   template: 
     src: zk.service.j2
     dest: /etc/systemd/system/zk.service
@@ -108,3 +108,4 @@
   service:
     name: zk
     state: started
+    enabled: yes
