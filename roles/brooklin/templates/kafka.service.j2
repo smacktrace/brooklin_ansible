@@ -6,8 +6,9 @@ Description=Apache Kafka
 Type=simple 
 User=kafka 
 Group=kafka 
-ExecStart=/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties 
-ExecStop=/opt/kafka/bin/kafka-server-stop.sh 
+WorkingDirectory=/brooklin/kafka/{{ KAFKA_FILENAME }}
+ExecStart=bin/kafka-server-start.sh config/server.properties 
+ExecStop=bin/kafka-server-stop.sh 
 
 [Install] 
 WantedBy=multi-user.target

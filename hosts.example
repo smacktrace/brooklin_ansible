@@ -1,0 +1,9 @@
+# Hosts
+
+[brooklin]
+192.168.1.2 kafkaNode=0
+192.168.1.3 kafkaNode=1
+192.168.1.4 kafkaNode=2
+
+[zookeeper]
+192.168.1.6
